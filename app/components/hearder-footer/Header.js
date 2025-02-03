@@ -4,6 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
+import { FaCartShopping } from "react-icons/fa6";
 import { AuthContext } from "@/app/context/authContext";
 import Link from "next/link";
 
@@ -27,7 +28,7 @@ const Header = () => {
         href={"/"}
         className="w-[50%] lg:w-[30%] flex items-center  gap-2 text-[18px] font-semibold "
       >
-        <img className="w-10" src="favicon.ico" alt="" />
+        <FaCartShopping className="text-3xl text-primary" />
         <span className="font-bold">Shopi</span>
       </Link>
       <div className="navbar-section hidden lg:flex justify-center items-center gap-4 lg:w-[40%]">

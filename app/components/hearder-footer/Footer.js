@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import { FaCartShopping } from 'react-icons/fa6'
 
 const Footer = () => {
   return (
@@ -11,7 +12,7 @@ const Footer = () => {
         href={"/"}
         className="w-[50%] lg:w-[30%] flex items-center  gap-2 text-[18px] font-semibold "
       >
-       <img className="w-10" src="favicon.ico" alt="" />
+      <FaCartShopping className="text-3xl text-primary" />
         <span className="font-bold">Shopi</span>
       </Link>
         </div>
