@@ -20,7 +20,7 @@ const HeroSection = () => {
       {/* Hero section image */}
       <div className="hero-pic relative flex justify-center items-end w-full h-[50%] lg:w-[50%] lg:h-full">
         <img
-          className="w-full h-full hue-rotate-[30deg] saturate-150 contrast-150 animate-wipeLeft object-cover lg:object-contain lg:object-right"
+          className="w-full h-full hue-rotate-[0deg] saturate-150 contrast-150 animate-wipeLeft object-cover lg:object-contain lg:object-right"
           src={"/hero-pic.png"}
           alt="hero image"
         />
