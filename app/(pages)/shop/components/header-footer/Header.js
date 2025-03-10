@@ -13,13 +13,10 @@ const Header = () => {
   const [isOpen, setisOpen] = useState(false);
   const items = 0;
   // Login / Logout Items
-  const logoutItems = [
+  const navItems = [
     { id: 1, name: "Shop", url: "/", icon: <FaShop /> },
-    { id: 2, name: "Products", url: "/products", icon: <FaShoppingCart /> },
-  ];
-  const loginItems = [
-    { id: 1, name: "Shop", url: "/", icon: <FaShop /> },
-    { id: 2, name: "Products", url: "/products", icon: <FaShoppingCart /> },
+    { id: 2, name: "Products", url: "/shop/products", icon: <FaShoppingCart /> },
+    { id: 3, name: "About", url: "/shop/about", icon: <FaShoppingCart /> },
   ];
 
   return (
@@ -32,38 +29,21 @@ const Header = () => {
         <span className="font-bold">Shopi</span>
       </Link>
 
-      <div className="navbar-section w-[50%] lg:w-[50%] relative flex gap-4 justify-end items-center actions">
+      <div className="navbar-section w-[50%] lg:w-[50%] relative flex gap-2 lg:gap-8 justify-end items-center actions">
         <div className="navbar-section hidden lg:flex justify-end items-center gap-4 lg:w-[40%]">
-          {isLogin
-            ? loginItems.map((item) => {
-                return (
-                  <a
-                    key={item.id}
-                    className="no-underline flex item-center gap-1 font-medium hover:text-primary transition-all duration-[0,5s,text-decoration] "
-                    href={item.url}
-                  >
-                    {item.name}
-                  </a>
-                );
-              })
-            : logoutItems.map((item) => {
-                return (
-                  <a
-                    key={item.id}
-                    className="no-underline flex items-center gap-1 font-medium hover:text-primary transition-all duration-[0,5s,text-decoration] "
-                    href={item.url}
-                  >
-                    {item.name}
-                  </a>
-                );
-              })}
+          {navItems.map((item) => {
+            return (
+              <a
+                key={item.id}
+                className="no-underline text-sm flex item-center gap-1 font-medium hover:text-primary transition-all duration-[0,5s,text-decoration] "
+                href={item.url}
+              >
+                {item.name}
+              </a>
+            );
+          })}
         </div>
-        <Link
-          href="/login"
-          className="button hidden lg:block text-white bg-primary py-[3px] px-10 rounded-full border-2 border-primary hover:bg-primary duration-150"
-        >
-          Login
-        </Link>
+
         {isLogin && (
           <a href={"/cart"}>
             {" "}
@@ -106,31 +86,18 @@ const Header = () => {
           </header>
           <div className="">
             <ul className="px-8 relative py-5">
-              {isLogin
-                ? loginItems.map((item) => {
-                    return (
-                      <Link
-                        key={item.id}
-                        href={item.url}
-                        className="flex items-center text-gray-900 text-md py-2"
-                      >
-                        <span className="text-gray-400 mr-5">{item.icon}</span>{" "}
-                        {item.name}
-                      </Link>
-                    );
-                  })
-                : logoutItems.map((item) => {
-                    return (
-                      <a
-                        key={item.id}
-                        href={item.url}
-                        className="flex items-center text-gray-900 text-md py-2"
-                      >
-                        <span className="text-gray-400 mr-5">{item.icon}</span>{" "}
-                        {item.name}
-                      </a>
-                    );
-                  })}
+              {navItems.map((item) => {
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.url}
+                    className="flex items-center text-gray-900 text-md py-2"
+                  >
+                    <span className="text-gray-400 mr-5">{item.icon}</span>{" "}
+                    {item.name}
+                  </Link>
+                );
+              })}
             </ul>
             <div className="btns flex w-full justify-center items-center">
               {isLogin && (

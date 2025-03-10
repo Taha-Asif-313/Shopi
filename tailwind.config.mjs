@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#000052",
+        primary: "#16a34a",
       },
       keyframes: {
         fade: {

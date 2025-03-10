@@ -1,8 +1,6 @@
 import "./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import Header from "./components/hearder-footer/Header";
-import Footer from "./components/hearder-footer/Footer";
 import { AuthProvider } from "./context/authContext";
 import { ProductProvider } from "./context/productContext";
 
@@ -24,14 +22,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <link rel="icon" type="image/svg+xml" href="/logo.png" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <AuthProvider>
           <ProductProvider>
-            <Header />
             {children}
-            <Footer />
+
             <Toaster />
           </ProductProvider>
         </AuthProvider>
