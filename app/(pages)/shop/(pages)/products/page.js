@@ -36,7 +36,7 @@ const ProductsPage = () => {
   // Display loading spinner if data is being fetched
   if (loading) {
     return (
-      <div className="absolute left-0 top-0 w-full flex justify-center items-center min-h-screen">
+      <div className="z-50 bg-white absolute left-0 top-0 w-full flex justify-center items-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-green-500"></div>
       </div>
     );
@@ -44,18 +44,25 @@ const ProductsPage = () => {
   return (
     <Flexbox
       direction={{ lg: "column", md: "column", sm: "column" }}
-      padding={{ sm: "100px 0px", md: "40px 0px", lg: "80px 0px" }}
+      padding={{ sm: "100px 0px", md: "100px 0px", lg: "100px 0px" }}
+      maxWidth={{ lg: "1400px" }}
+      className="mx-auto"
       backgroundColor="transparent"
     >
       <div className="w-full px-5 lg:px-10 flex items-center justify-between mb-5">
         <div className="content w-[60%] flex flex-col justify-start items-start ">
-          <h1 className="lg:text-6xl text-3xl leading-tight font-bold">Products</h1>
+          <h1 className="lg:text-6xl text-3xl leading-tight font-bold">
+            Products
+          </h1>
           <p className="lg:text-lg text-[12px] leading-tight text-center text-primary font-semibold ">
             Discover the latest products!
           </p>
         </div>
-        <div className="w-[40%]" >
-        <FilterDropdown options={filterOptions} onSelect={handleFilterChange} />
+        <div className="w-[40%]">
+          <FilterDropdown
+            options={filterOptions}
+            onSelect={handleFilterChange}
+          />
         </div>
       </div>
 

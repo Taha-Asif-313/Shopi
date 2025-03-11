@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { ProductContext } from "@/app/context/productContext";
-import { Badge, Button, Image } from "shadlc";
-import { FaShoppingCart } from "react-icons/fa";
+import { Button } from "shadlc";
 
 const ProductCard = ({
   Id,
@@ -20,7 +19,7 @@ const ProductCard = ({
   // Functions
   const onSelectProduct = () => {
     setselectedProduct(Product);
-    router.push(`/product-details`);
+    router.push(`/shop/products/${Id}`);
   };
 
   return (
@@ -30,14 +29,14 @@ const ProductCard = ({
         className="relative flex justify-between w-full flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
       >
         <div className="relative w-full p-3 flex max-h-60 overflow-hidden">
-          <Image
+          <img
             src={Url}
-            alt="product image"
-            width="100%"
-            height="240px"
-            borderRadius="12px"
-            objectFit="contain"
-            lazyLoad
+            alt="High-quality product image - Buy now"
+            loading="lazy"
+            decoding="async"
+            width="300"
+            height="250"
+            className="object-contain rounded"
           />
           {Discount && (
             <span className="absolute top-0 left-0 p-2 rounded-ee-lg bg-black px-2 text-center text-sm font-medium text-white">

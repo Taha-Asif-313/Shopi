@@ -7,6 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { AuthContext } from "@/app/context/authContext";
 import Link from "next/link";
+import { Drawer } from "shadlc";
 
 const Header = () => {
   const { isLogin } = useContext(AuthContext);
@@ -14,63 +15,61 @@ const Header = () => {
   const items = 0;
   // Login / Logout Items
   const navItems = [
-    { id: 1, name: "Shop", url: "/", icon: <FaShop /> },
-    { id: 2, name: "Products", url: "/shop/products", icon: <FaShoppingCart /> },
+    { id: 1, name: "Home", url: "/shop", icon: <FaShop /> },
+    {
+      id: 2,
+      name: "Products",
+      url: "/shop/products",
+      icon: <FaShoppingCart />,
+    },
     { id: 3, name: "About", url: "/shop/about", icon: <FaShoppingCart /> },
   ];
 
   return (
-    <nav className="navbar absolute max-w-[1400px] mx-auto h-16 lg:h-14 z-50 animate-wipeDown w-full flex justify-between items-center shadow-[0_2px_10px_rgba(0,0,0,0.3)] px-5 lg:px-20 py-2">
-      <Link
-        href={"/"}
-        className="w-[50%] lg:w-[30%] flex items-center  gap-2 text-[18px] font-semibold "
-      >
-        <FaCartShopping className="text-3xl text-primary" />
-        <span className="font-bold">Shopi</span>
-      </Link>
+    <nav className="navbar absolute h-16 lg:h-14 z-50 animate-wipeDown w-full ">
+      <div className="flex justify-between items-center max-w-[1400px] mx-auto shadow-[0_2px_10px_rgba(0,0,0,0.3)] px-5 lg:px-10 py-2 rounded-b-xl">
+        <Link
+          href={"/shop"}
+          className="w-[50%] flex items-center  gap-2 text-[18px] font-semibold "
+        >
+          <FaCartShopping className="text-3xl text-primary" />
+          <span className="font-bold">Shopi</span>
+        </Link>
 
-      <div className="navbar-section w-[50%] lg:w-[50%] relative flex gap-2 lg:gap-8 justify-end items-center actions">
-        <div className="navbar-section hidden lg:flex justify-end items-center gap-4 lg:w-[40%]">
-          {navItems.map((item) => {
-            return (
-              <a
+        <div className="navbar-section w-[50%] flex gap-4 lg:gap-8 justify-end items-center">
+          {/* Navigation Links */}
+          <div className="navbar-section hidden lg:flex justify-end items-center gap-4 lg:w-[40%]">
+            {navItems.map((item) => (
+              <Link
                 key={item.id}
-                className="no-underline text-sm flex item-center gap-1 font-medium hover:text-primary transition-all duration-[0,5s,text-decoration] "
+                className="no-underline text-sm flex items-center gap-1 font-medium hover:text-primary transition-all duration-300"
                 href={item.url}
               >
                 {item.name}
-              </a>
-            );
-          })}
-        </div>
+              </Link>
+            ))}
+          </div>
 
-        {isLogin && (
-          <a href={"/cart"}>
-            {" "}
-            <div className="relative py-2 mr-5">
-              <div className="top-0 absolute left-6">
-                <p className="flex animate-pop h-2 w-2 items-center justify-center rounded-full bg-primary p-3 text-[10px] text-white">
+          {/* Cart Icon with Fixed Size */}
+          {isLogin && (
+            <Link href="/shop/cart" className="relative py-2 mr-5">
+              <div className="absolute top-1 left-6">
+                <p className="flex animate-pop h-5 w-5 min-w-[20px] items-center justify-center rounded-full bg-primary p-2 text-[10px] text-white">
                   {items}
                 </p>
               </div>
-              <FaShoppingCart className="text-3xl" />
-            </div>
-          </a>
-        )}
-        <RxHamburgerMenu
-          onClick={() => {
-            setisOpen(!isOpen);
-          }}
-          className="text-3xl lg:hidden"
-        />
-      </div>
+              <FaShoppingCart className="text-3xl w-8 h-8" />
+            </Link>
+          )}
 
-      <div
-        className={`z-50 md:hidden ${
-          isOpen ? "grid" : "hidden"
-        } animate-wipeLeft min-h-screen place-content-center absolute top-0 right-0 bg-black`}
-      >
-        <div className="bg-white animate-wipeLeft h-screen shadow-lg max-w-xs mx-auto fixed top-0 right-0 z-50">
+          {/* Hamburger Menu with Fixed Size */}
+          <RxHamburgerMenu
+            onClick={() => setisOpen(!isOpen)}
+            className="text-3xl w-8 h-8 lg:hidden"
+          />
+        </div>
+
+        <Drawer position="right" open={isOpen} onClose={() => setisOpen(false)}>
           <header className="bg-gradient-to-r from-primary to-black transform flex items-center pt-14 pb-8 px-6">
             <IoMdClose
               onClick={() => {
@@ -84,12 +83,13 @@ const Header = () => {
               alt="Dr. Jessica James"
             />
           </header>
-          <div className="">
+          <div>
             <ul className="px-8 relative py-5">
               {navItems.map((item) => {
                 return (
                   <Link
                     key={item.id}
+                    onClick={() => setisOpen(false)}
                     href={item.url}
                     className="flex items-center text-gray-900 text-md py-2"
                   >
@@ -100,20 +100,14 @@ const Header = () => {
               })}
             </ul>
             <div className="btns flex w-full justify-center items-center">
-              {isLogin && (
+              {!isLogin && (
                 <button className="w-32 bg-primary text-white py-2 rounded">
                   Logout
                 </button>
               )}
-              <a
-                href="/login"
-                className="w-32 text-center bg-primary text-white py-2 rounded"
-              >
-                Login
-              </a>
             </div>
           </div>
-        </div>
+        </Drawer>
       </div>
     </nav>
   );

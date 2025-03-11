@@ -6,26 +6,27 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 const ProductOverview = ({ Id, Title, Description, Price, Images }) => {
   return (
     <>
-    <div className="flex items-center max-md:flex-col max-md:items-start max-md:gap-2 lg:gap-6">
-       <Link href={'/shop/products'}>
-       <FaArrowCircleLeft className="text-5xl max-md:text-4xl text-primary"/>
-       </Link> 
-    <div>
-        <h2 className="text-xl font-bold text-gray-800">{Title}</h2>
-        <p className="text-sm text-gray-500 mt-2">{Description}</p>
+      <div className="flex items-center max-md:flex-col max-md:items-start max-md:gap-2 lg:gap-6">
+        <Link href={"/shop/products"}>
+          <FaArrowCircleLeft className="text-5xl max-md:text-4xl text-primary" />
+        </Link>
+        <div>
+          <h2 className="text-xl font-bold text-gray-800">{Title}</h2>
+          <p className="text-sm text-gray-500 mt-2">{Description}</p>
+        </div>
       </div>
-    </div>
-     
 
       <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-8 mt-6">
         <div className="lg:col-span-3">
           <div className="grid sm:grid-cols-3 gap-2 text-center">
             <div className="sm:col-span-2 bg-gray-100 p-4 flex items-center rounded">
-              <img
+              {Images[0] ? <img
                 src={Images[0]}
                 alt="Product"
                 className="w-full aspect-[5/4] object-contain object-top"
-              />
+              />:       <div className="z-50 bg-white absolute left-0 top-0 w-full flex justify-center items-center h-full">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-green-500"></div>
+            </div>}
             </div>
 
             <div className="sm:space-y-2 w-full h-full max-sm:grid max-sm:grid-cols-2 max-sm:gap-2">

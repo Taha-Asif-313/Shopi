@@ -1,31 +1,30 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
-import { Button, Flexbox, GridView, Image, Text } from "shadlc";
+import { Button, Flexbox, Image, Text } from "shadlc";
 import ProductGallery from "./components/product/ProductGallery";
 
 const Shop = () => {
   const [Products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [productLoading, setproductLoading] = useState(true);
 
   useEffect(() => {
     fetch("/product.json")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data.products);
-        setLoading(false);
+        setproductLoading(false);
       })
       .catch((error) => {
         console.error("Error loading products:", error);
-        setLoading(false);
+        setproductLoading(false);
       });
   }, []);
 
   // Display loading spinner if data is being fetched
-  if (loading && windowSize.width == 0) {
+  if (!window.innerWidth) {
     return (
-      <div className="absolute left-0 top-0 w-full flex justify-center items-center min-h-screen">
+      <div className="z-50 bg-white absolute left-0 top-0 w-full flex justify-center items-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-green-500"></div>
       </div>
     );
@@ -34,11 +33,11 @@ const Shop = () => {
   return (
     <div className="mx-auto max-w-[1400px]">
       <Flexbox
-        direction={{ sm: "column-reverse", md: "column", lg: "row" }}
+        direction={{ sm: "column-reverse", md: "column-reverse", lg: "row" }}
         align={{ sm: "center", md: "center", lg: "center" }}
         justify={{ sm: "center", md: "center", lg: "space-between" }}
         gap={{ sm: "0px", md: "20px", lg: "30px" }}
-        padding={{ sm: "20px", md: "20px", lg: "0px 80px" }}
+        padding={{ sm: "20px", md: "20px 20px", lg: "0px 42px" }}
         backgroundColor="#fff"
         width={{ sm: "100%", md: "100%", lg: "100%" }}
         height={{ sm: "auto", md: "auto", lg: "auto" }}
@@ -70,7 +69,7 @@ const Shop = () => {
             fontSize="17px"
             lineHeight="24px"
             margin="0 0 10px 0"
-            className="max-md:!text-center max-md:!text-sm"
+            className="max-lg:!text-center max-md:!text-sm"
           >
             Discover the latest trends in fashion and get inspired by our new
             styles. Make your shop with your
@@ -108,7 +107,7 @@ const Shop = () => {
       </Flexbox>
       <Flexbox
         direction={{ lg: "column", md: "column", sm: "column" }}
-        padding={{ sm: "40px 0px", md: "40px 0px", lg: "40px 0px" }}
+        padding={{ sm: "40px 0px", md: "60px 0px", lg: "40px 0px" }}
         backgroundColor="transparent"
       >
         <div className="content flex flex-col justify-center items-center mb-5">
@@ -117,7 +116,7 @@ const Shop = () => {
             Discover the latest products!
           </p>
         </div>
-        {loading ? (
+        {productLoading ? (
           <div className="flex justify-center items-center min-h-[200px]">
             <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-green-500"></div>
           </div>
