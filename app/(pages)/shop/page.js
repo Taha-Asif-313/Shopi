@@ -22,7 +22,7 @@ const Shop = () => {
   }, []);
 
   // Display loading spinner if data is being fetched
-  if (!window.innerWidth) {
+  if (!Window.innerWidth) {
     return (
       <div className="z-50 bg-white absolute left-0 top-0 w-full flex justify-center items-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-green-500"></div>
